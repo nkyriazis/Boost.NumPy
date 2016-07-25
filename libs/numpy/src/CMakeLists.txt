@@ -18,9 +18,12 @@ add_library(boost_numpy ${LIBRARY_TYPE}
   numpy.cpp
 )
 target_link_libraries(boost_numpy ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+set_target_properties(boost_numpy PROPERTIES DEBUG_POSTFIX "d")
 
-install(TARGETS boost_numpy 
+install(TARGETS boost_numpy EXPORT boost_numpy
+  INCLUDES DESTINATION include
   ARCHIVE DESTINATION lib${LIB_SUFFIX}
   LIBRARY DESTINATION lib${LIB_SUFFIX}
   PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
+install(EXPORT boost_numpy DESTINATION cmake)
